@@ -1,55 +1,69 @@
 $(document).ready(function() {
 
-	//what does this do?
-	function convert_value_to_string(value) {
-		if (value > 10) {
-			switch (value) {
-				case 11:
-				return 'Jack';
-				break;
-				case 12:
-				return 'Queen';
-				break;
-				case 13:
-				return 'King';
-				break;
-			}
-		}
-		return value.toString();
-	}
+    //what does this do?
+    function convert_value_to_string(value) {
+        if (value > 10) {
+            switch (value) {
+                case 11:
+                    return 'Jack';
+                    break;
+                case 12:
+                    return 'Queen';
+                    break;
+                case 13:
+                    return 'King';
+                    break;
+            }
+        }
+        return value.toString();
+    }
 
-	//what does this do?
-	var deck = [];
-	var suits = ['hearts', 'diamonds', 'spades', 'clubs'];
-	for (var i = 0; i<suits.length; i++) {
-		var suit = suits[i];
-		for (var j = 0; j<13; j++) {
-			deck.push({
-                number: j+1,
+    //what does this do?
+    var deck = [];
+    var suits = ['hearts', 'diamonds', 'spades', 'clubs'];
+    for (var i = 0; i < suits.length; i++) {
+        var suit = suits[i];
+        for (var j = 0; j < 13; j++) {
+            deck.push({
+                number: j + 1,
                 suit: suit});
-		}
-	}
-	
-	//shuffle the deck
-    console.log("before", deck);
-    _.shuffle(deck);
-    console.log("after", deck);
+        }
+    }
 
-	var cards_player_1 = [];
-	var cards_player_2 = [];
-	//divide out the cards into the two arrays
-	
-	
-	//create a function (algorithm) called "war" that takes two cards as parameters, compares them and returns a winner. A tie should return false.
-	function war() {
-	}
-	
-	
-	//create a play function
-		//compare the cards
-		//give the winner both cards (at end of deck)
-	function play() {
-		
+    //shuffle the deck
+    _.shuffle(deck);
+    deck = _.shuffle(deck);
+    console.log(deck);
+
+    var cards_player_1 = [];
+    var cards_player_2 = [];
+    //divide out the cards into the two arrays
+    cards_player_1.push(deck.slice(0, 26));
+    cards_player_2.push(deck.slice(26));
+    console.log(cards_player_1);
+    console.log(cards_player_2);
+
+
+    //create a function (algorithm) called "war" that takes two cards as parameters, compares them and returns a winner. A tie should return false.
+    var warTime = function war(p1card, p2card) {
+        if (p1card === p2card) {
+            return false;
+        } else if (p1card > p2card) {
+            return 'Player 1 wins'
+        } else {
+            return 'Player 2 wins'
+        }
+    }
+
+    //create a play function
+    //compare the cards
+    //give the winner both cards (at end of deck)
+    function play() {
+        var p1card = cards_player_1[0];
+        var p2card = cards_player_2[0];
+        warTime();
+     }
+
 		//this function (defined below) will continue to the next turn
 		advance();
 	}
