@@ -31,24 +31,25 @@ $(document).ready(function() {
     }
 
     //shuffle the deck
-    _.shuffle(deck);
     deck = _.shuffle(deck);
     console.log(deck);
 
     var cards_player_1 = [];
     var cards_player_2 = [];
     //divide out the cards into the two arrays
-    cards_player_1.push(deck.slice(0, 26));
-    cards_player_2.push(deck.slice(26));
+
+    cards_player_1 = (deck.slice(0, 26));
+    cards_player_2 = (deck.slice(26));
     console.log(cards_player_1);
     console.log(cards_player_2);
 
 
     //create a function (algorithm) called "war" that takes two cards as parameters, compares them and returns a winner. A tie should return false.
-    var warTime = function war(p1card, p2card) {
-        if (p1card === p2card) {
+    var warTime = function(p1card, p2card) {
+
+        if (p1card.number === p2card.number) {
             return false;
-        } else if (p1card > p2card) {
+        } else if (p1card.number > p2card.number) {
             return 'Player 1 wins'
         } else {
             return 'Player 2 wins'
@@ -61,22 +62,24 @@ $(document).ready(function() {
     function play() {
         var p1card = cards_player_1[0];
         var p2card = cards_player_2[0];
-        warTime(p1card, p2card);
-        if (warTime === 'Player 1 wins') {
+        var result = warTime(p1card, p2card);
+
+        if (result === 'Player 1 wins') {
             cards_player_1.push(cards_player_2.splice(0, 1))
-        } else if (warTime === 'Player 2 wins') {
+        } else if (result === 'Player 2 wins') {
             cards_player_2.push(cards_player_1.splice(0, 1))
         }
         else {
             return 'Draw again';
         }
-    }
+
 
 		//this function (defined below) will continue to the next turn
 		advance();
-	},
+	}
 	
 	function advance() {
+        debugger;
 		//take the top two cards and display them
 		if (cards_player_1.length) {
 			var card_1 = cards_player_1[0];
@@ -87,8 +90,8 @@ $(document).ready(function() {
 			$("#my-card-count").html(cards_player_2.length);
 			
 		}
-	},
-	advance(),
+	}
+	advance();
 	
 	$(".btn").click(function() {
 		play();
