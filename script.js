@@ -53,7 +53,7 @@ $(document).ready(function() {
         } else {
             return 'Player 2 wins'
         }
-    }
+    };
 
     //create a play function
     //compare the cards
@@ -61,12 +61,20 @@ $(document).ready(function() {
     function play() {
         var p1card = cards_player_1[0];
         var p2card = cards_player_2[0];
-        warTime();
-     }
+        warTime(p1card, p2card);
+        if (warTime === 'Player 1 wins') {
+            cards_player_1.push(cards_player_2.splice(0, 1))
+        } else if (warTime === 'Player 2 wins') {
+            cards_player_2.push(cards_player_1.splice(0, 1))
+        }
+        else {
+            return 'Draw again';
+        }
+    }
 
 		//this function (defined below) will continue to the next turn
 		advance();
-	}
+	},
 	
 	function advance() {
 		//take the top two cards and display them
@@ -79,10 +87,10 @@ $(document).ready(function() {
 			$("#my-card-count").html(cards_player_2.length);
 			
 		}
-	}
-	advance();
+	},
+	advance(),
 	
 	$(".btn").click(function() {
 		play();
-	});
+	})
 });
