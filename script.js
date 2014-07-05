@@ -24,13 +24,17 @@ $(document).ready(function() {
 	for (var i = 0; i<suits.length; i++) {
 		var suit = suits[i];
 		for (var j = 0; j<13; j++) {
-			deck.push({number: j+1, suit: suit});
+			deck.push({
+                number: j+1,
+                suit: suit});
 		}
 	}
 	
 	//shuffle the deck
-	
-	
+    console.log("before", deck);
+    _.shuffle(deck);
+    console.log("after", deck);
+
 	var cards_player_1 = [];
 	var cards_player_2 = [];
 	//divide out the cards into the two arrays
